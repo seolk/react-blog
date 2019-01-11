@@ -22,9 +22,8 @@ class Api::PostsController < ApplicationController
   end
   
   def update
-    @post = Blog.posts.new(post_params)
     if @post.update(post_params)
-      render json: post 
+      render json: @post
     else
       render json: post.errors, status: 422
     end
@@ -37,11 +36,11 @@ class Api::PostsController < ApplicationController
   private 
       
   def set_post
-    @post = Product.find(params[:id])
+    @post = Post.find(params[:id])
   end
   
   def post_params
-    params.require(:post).permit(:name, :description, :blody, :date, :blog_id)
+    params.require(:post).permit(:name, :description, :body, :date, :blog_id)
   end
   
   def set_blog

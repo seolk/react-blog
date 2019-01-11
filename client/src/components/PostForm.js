@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { Form } from 'semantic-ui-react'
 
 class PostForm extends Component {
-  defaultValues = { name: '', body: '', description: '', date: '' }
+  defaultValues = { name: '', description: '', body: '', date: '' }
   state = { ...this.defaultValues }
 
   componentDidMount() {
@@ -18,44 +19,47 @@ class PostForm extends Component {
   }
 
   handleChange = (e) => {
-    const { target: { name, value } } = e;
+    const { name, value } = e.target;
     this.setState({ [name]: value })
   }
 
   render() {
     const { name, description, body, date } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          name="name"
-          placeholder="Name"
-          value={name}
-          onChange={this.handleChange}
-          required
-        /> <br/>
-        <input
-          name="description"
-          placeholder="Description"
-          value={description}
-          onChange={this.handleChange}
-        /> <br/>
-        <textarea
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Group widths='equal'>
+          <Form.Input
+            name="name"
+            placeholder="Post Name"
+            value={name}
+            onChange={this.handleChange}
+            required
+          />
+          <Form.Input
+            name="description"
+            placeholder="Short Description"
+            value={description}
+            onChange={this.handleChange}
+            required
+          />
+          <Form.Input
+            name="date"
+            placeholder="Date"
+            value={date}
+            type="date"
+            onChange={this.handleChange}
+            required          
+          />
+        </Form.Group>
+        <Form.TextArea
           name="body"
           placeholder="Body"
-          type="text"
           value={body}
           onChange={this.handleChange}
-        /> <br/>
-        <input
-          name="date"
-          placeholder="mm/dd/yyyy"
-          value={date}
-          type="date"
-          onChange={this.handleChange}
-        /> 
-        
-        <button>Submit</button>
-      </form>
+          required
+        />
+        <Form.Button type='submit' size='tiny'>Submit</Form.Button>
+      </Form>
     )
   }
 }

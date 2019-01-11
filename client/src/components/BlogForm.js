@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Form, Segment } from 'semantic-ui-react'
 
 class BlogForm extends Component {
   defaultValues = { title: '', category: '' }
@@ -25,23 +26,27 @@ class BlogForm extends Component {
   render() {
     const { title, category } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          name="title"
-          placeholder="Title"
-          value={title}
-          onChange={this.handleChange}
-          required
-        />
-        <input
-          name="category"
-          placeholder="Category"
-          value={category}
-          onChange={this.handleChange}
-          required
-        />
-        <button>Submit</button>
-      </form>
+      <Segment inverted>
+        <Form inverted onSubmit={this.handleSubmit}>
+          <Form.Group widths='equal'>
+            <Form.Input
+              name="title"
+              placeholder="Blog Title"
+              value={title}
+              onChange={this.handleChange}
+              required
+            />
+            <Form.Input
+              name="category"
+              placeholder="Blog Category"
+              value={category}
+              onChange={this.handleChange}
+              required
+            />
+          </Form.Group>
+          <Form.Button inverted type='submit' size='tiny'>Submit</Form.Button>
+        </Form>
+      </Segment>
     )
   }
 }
